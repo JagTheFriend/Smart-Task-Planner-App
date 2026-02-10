@@ -17,7 +17,7 @@ func NewAuthHandler(e *echo.Group, db *gorm.DB) *AuthHandler {
 }
 
 func (h *AuthHandler) RegisterRoutes() {
-	h.e.POST("/login", h.signup)
+	h.e.POST("/signup", h.signup)
 	h.e.POST("/login", h.login)
 }
 

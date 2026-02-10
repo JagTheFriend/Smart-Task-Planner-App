@@ -19,5 +19,7 @@ func Connect() *gorm.DB {
 	if err != nil {
 		slog.Error("Database: Failed Migration")
 	}
+	slog.Info("Database: Migration Passed")
+	slog.Info("Database: Connected")
 	return db
 }
