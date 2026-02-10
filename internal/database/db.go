@@ -16,7 +16,7 @@ func Connect() *gorm.DB {
 		panic("Database connection failed")
 	}
 	go func() {
-		err = db.AutoMigrate(&models.User{}, &models.Task{}, &models.Category{})
+		err = db.AutoMigrate(&models.User{}, &models.Task{})
 		if err != nil {
 			slog.Error("Database: Failed Migration")
 		}
