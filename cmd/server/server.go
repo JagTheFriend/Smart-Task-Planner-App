@@ -6,6 +6,7 @@ import (
 	"os"
 	customMiddleware "smart-task-planner/cmd/middleware"
 	"smart-task-planner/cmd/server/routes/authentication"
+	"smart-task-planner/cmd/server/routes/task"
 	"smart-task-planner/internal/database"
 
 	"github.com/go-playground/validator/v10"
@@ -28,6 +29,9 @@ func StartServer() {
 
 	authHandler := authentication.NewAuthHandler(apiGroup, db)
 	authHandler.RegisterRoutes()
+
+	taskHandler := task.NewTaskHandler(apiGroup, db)
+	taskHandler.RegisterRoutes()
 
 	if err := e.Start(fmt.Sprintf(":%s", os.Getenv("PORT"))); err != nil {
 		e.Logger.Error("failed to start server", "error", err)
