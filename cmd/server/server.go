@@ -7,6 +7,7 @@ import (
 	customMiddleware "smart-task-planner/cmd/middleware"
 	"smart-task-planner/cmd/server/routes/authentication"
 	"smart-task-planner/cmd/server/routes/task"
+	"smart-task-planner/cmd/utils"
 	"smart-task-planner/internal/database"
 
 	"github.com/go-playground/validator/v10"
@@ -21,6 +22,7 @@ func StartServer() {
 	e.Use(middleware.Recover())
 
 	e.Validator = &customMiddleware.CustomValidator{Validator: validator.New()}
+	e.Logger = utils.SetupLogger()
 
 	apiGroup := e.Group("/api/v1")
 	apiGroup.GET("/health", func(c *echo.Context) error {
