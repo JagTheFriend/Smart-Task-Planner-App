@@ -3,7 +3,7 @@ package database
 import (
 	"log"
 	"os"
-	"smart-task-planner/cmd/models"
+	"smart-task-planner/internal/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
