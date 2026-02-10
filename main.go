@@ -1,12 +1,15 @@
 package main
 
 import (
-	"fmt"
-	_ "github.com/joho/godotenv/autoload"
+	"log/slog"
 	"smart-task-planner/cmd/server"
+	"smart-task-planner/cmd/utils"
+
+	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
-	fmt.Println("Hello World!")
+	utils.SetupLogger()
+	slog.Info("Hello World!")
 	server.StartServer()
 }
