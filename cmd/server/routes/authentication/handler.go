@@ -65,7 +65,7 @@ func (h *AuthHandler) login(c *echo.Context) error {
 	}
 
 	var existingUser models.User
-	res := h.db.First(&existingUser, models.User{Email: u.Email})
+	res := h.db.Select("Name", "Email").First(&existingUser, models.User{Email: u.Email})
 	if res.Error != nil && errors.Is(res.Error, gorm.ErrRecordNotFound) {
 		return c.JSON(http.StatusConflict, map[string]string{"message": "User Does Not Exist"})
 	}
