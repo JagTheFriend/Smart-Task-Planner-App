@@ -3,6 +3,7 @@ module smart-task-planner
 go 1.25.7
 
 require (
+	github.com/golang-jwt/jwt/v5 v5.3.0
 	github.com/labstack/echo/v5 v5.0.3
 	golang.org/x/crypto v0.48.0
 	gorm.io/gorm v1.25.10
@@ -20,6 +21,7 @@ require (
 )
 
 require (
+	github.com/labstack/echo-jwt/v5 v5.0.0
 	golang.org/x/time v0.14.0 // indirect
 	gorm.io/driver/postgres v1.6.0
 )
