@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"smart-task-planner/cmd/middleware"
+	"smart-task-planner/cmd/utils"
 	"smart-task-planner/internal/models"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -32,10 +33,7 @@ func (h *AuthHandler) RegisterRoutes() {
 
 func (h *AuthHandler) signup(c *echo.Context) error {
 	var u SignUpDTO
-	if err := c.Bind(&u); err != nil {
-		return err
-	}
-	if err := c.Validate(&u); err != nil {
+	if err := utils.BindAndValidate(c, &u); err != nil {
 		return err
 	}
 
@@ -66,10 +64,7 @@ func (h *AuthHandler) signup(c *echo.Context) error {
 
 func (h *AuthHandler) login(c *echo.Context) error {
 	var u LoginDTO
-	if err := c.Bind(&u); err != nil {
-		return err
-	}
-	if err := c.Validate(&u); err != nil {
+	if err := utils.BindAndValidate(c, &u); err != nil {
 		return err
 	}
 
