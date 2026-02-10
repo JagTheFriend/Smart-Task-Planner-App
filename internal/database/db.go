@@ -15,11 +15,13 @@ func Connect() *gorm.DB {
 	if err != nil {
 		panic("Database connection failed")
 	}
-	err = db.AutoMigrate(&models.User{}, &models.Task{}, &models.Category{})
-	if err != nil {
-		slog.Error("Database: Failed Migration")
-	}
-	slog.Info("Database: Migration Passed")
+	go func() {
+		err = db.AutoMigrate(&models.User{}, &models.Task{}, &models.Category{})
+		if err != nil {
+			slog.Error("Database: Failed Migration")
+		}
+		slog.Info("Database: Migration Passed")
+	}()
 	slog.Info("Database: Connected")
 	return db
 }
