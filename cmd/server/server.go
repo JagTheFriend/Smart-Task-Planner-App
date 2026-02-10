@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	customMiddleware "smart-task-planner/cmd/middleware"
 	"smart-task-planner/cmd/server/routes/authentication"
 	"smart-task-planner/internal/database"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v5"
 	"github.com/labstack/echo/v5/middleware"
 )
@@ -16,6 +18,8 @@ func StartServer() {
 	e := echo.New()
 	e.Use(middleware.RequestLogger())
 	e.Use(middleware.Recover())
+
+	e.Validator = &customMiddleware.CustomValidator{Validator: validator.New()}
 
 	apiGroup := e.Group("/api/v1")
 	apiGroup.GET("/health", func(c *echo.Context) error {
