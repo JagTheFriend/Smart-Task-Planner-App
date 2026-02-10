@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	_ "github.com/joho/godotenv/autoload"
 	"smart-task-planner/cmd/server"
 )
 

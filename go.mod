@@ -4,6 +4,7 @@ go 1.25.7
 
 require (
 	github.com/golang-jwt/jwt/v5 v5.3.0
+	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v5 v5.0.3
 	golang.org/x/crypto v0.48.0
 	gorm.io/gorm v1.25.10
