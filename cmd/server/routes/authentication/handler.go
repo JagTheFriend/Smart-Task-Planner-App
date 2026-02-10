@@ -2,10 +2,14 @@ package authentication
 
 import (
 	"errors"
+	"fmt"
 	"log/slog"
 	"net/http"
+	"os"
+	"smart-task-planner/cmd/middleware"
 	"smart-task-planner/internal/models"
 
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/labstack/echo/v5"
 	"gorm.io/gorm"
 )
@@ -37,8 +41,13 @@ func (h *AuthHandler) signup(c *echo.Context) error {
 
 	var existingUser models.User
 	res := h.db.First(&existingUser, models.User{Email: u.Email})
-	if res.Error != nil && !(errors.Is(res.Error, gorm.ErrRecordNotFound)) {
+	if !(errors.Is(res.Error, gorm.ErrRecordNotFound)) {
 		return c.JSON(http.StatusConflict, map[string]string{"message": "User Already Exists"})
+	}
+
+	if res.Error != nil {
+		slog.Error(fmt.Sprintf("Auth | Login Error | %s", res.Error.Error()))
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": "Something went wrong"})
 	}
 
 	res = h.db.Create(&models.User{
@@ -48,7 +57,7 @@ func (h *AuthHandler) signup(c *echo.Context) error {
 	})
 
 	if res.Error != nil {
-		slog.Warn("Auth: Failed to Resgister User")
+		slog.Error(fmt.Sprintf("Auth | Signup Error | %s", res.Error.Error()))
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": "Failed to register"})
 	}
 	slog.Info("Auth:New User Detail Saved")
@@ -65,10 +74,23 @@ func (h *AuthHandler) login(c *echo.Context) error {
 	}
 
 	var existingUser models.User
-	res := h.db.Select("Name", "Email").First(&existingUser, models.User{Email: u.Email})
-	if res.Error != nil && errors.Is(res.Error, gorm.ErrRecordNotFound) {
+	res := h.db.First(&existingUser, models.User{Email: u.Email})
+	if errors.Is(res.Error, gorm.ErrRecordNotFound) {
 		return c.JSON(http.StatusConflict, map[string]string{"message": "User Does Not Exist"})
 	}
 
-	return c.JSON(http.StatusOK, map[string]models.User{"message": existingUser})
+	if res.Error != nil {
+		slog.Error(fmt.Sprintf("Auth | Login Error | %s", res.Error.Error()))
+		return c.JSON(http.StatusInternalServerError, map[string]string{"message": "Something went wrong"})
+	}
+
+	claims := middleware.JwtCustomClaims{
+		UserId: existingUser.ID,
+	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	t, err := token.SignedString([]byte(os.Getenv("JWT_KEY")))
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, map[string]string{"message": t})
 }
