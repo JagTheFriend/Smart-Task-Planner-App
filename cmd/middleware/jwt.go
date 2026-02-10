@@ -8,8 +8,8 @@ import (
 	"github.com/labstack/echo/v5"
 )
 
-type jwtCustomClaims struct {
-	UserId string `json:"userId"`
+type JwtCustomClaims struct {
+	UserId uint `json:"userId"`
 	jwt.RegisteredClaims
 }
 
@@ -17,7 +17,7 @@ func JwtMiddleware() echo.MiddlewareFunc {
 	// Configure middleware with the custom claims type
 	config := echojwt.Config{
 		NewClaimsFunc: func(c *echo.Context) jwt.Claims {
-			return new(jwtCustomClaims)
+			return new(JwtCustomClaims)
 		},
 		SigningKey: os.Getenv("JWT_KEY"),
 	}
