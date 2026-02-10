@@ -19,7 +19,7 @@ func JwtMiddleware() echo.MiddlewareFunc {
 		NewClaimsFunc: func(c *echo.Context) jwt.Claims {
 			return new(JwtCustomClaims)
 		},
-		SigningKey: os.Getenv("JWT_KEY"),
+		SigningKey: []byte(os.Getenv("JWT_KEY")),
 	}
 
 	return echojwt.WithConfig(config)
