@@ -33,6 +33,7 @@ func StartServer() {
 	authHandler.RegisterRoutes()
 
 	apiGroup.Use(customMiddleware.JwtMiddleware())
+	apiGroup.Use(customMiddleware.GetJwtDataMiddleware)
 	taskHandler := task.NewTaskHandler(apiGroup, db)
 	taskHandler.RegisterRoutes()
 

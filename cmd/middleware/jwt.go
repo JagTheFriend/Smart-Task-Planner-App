@@ -24,3 +24,15 @@ func JwtMiddleware() echo.MiddlewareFunc {
 
 	return echojwt.WithConfig(config)
 }
+
+func GetJwtDataMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c *echo.Context) error {
+		user, err := echo.ContextGet[*jwt.Token](c, "user")
+		if err != nil {
+			return echo.ErrUnauthorized.Wrap(err)
+		}
+		claims := user.Claims.(JwtCustomClaims)
+		c.Set("UserId", claims.UserId)
+		return next(c)
+	}
+}

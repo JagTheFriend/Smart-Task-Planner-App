@@ -15,9 +15,6 @@ type TaskHandler struct {
 
 func NewTaskHandler(e *echo.Group, db *gorm.DB) *TaskHandler {
 	authGroup := e.Group("/task")
-
-	authGroup.Use(GetJwtDataMiddleware)
-
 	return &TaskHandler{e: authGroup, db: db}
 }
 
