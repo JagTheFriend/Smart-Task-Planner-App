@@ -29,9 +29,14 @@ func GetJwtDataMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c *echo.Context) error {
 		user, err := echo.ContextGet[*jwt.Token](c, "user")
 		if err != nil {
-			return echo.ErrUnauthorized.Wrap(err)
+			return echo.ErrUnauthorized
 		}
-		claims := user.Claims.(JwtCustomClaims)
+
+		claims, ok := user.Claims.(*JwtCustomClaims)
+		if !ok {
+			return echo.ErrUnauthorized
+		}
+
 		c.Set("UserId", claims.UserId)
 		return next(c)
 	}
