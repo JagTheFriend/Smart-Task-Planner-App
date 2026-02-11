@@ -43,7 +43,7 @@ JWT_KEY=your_secret_key
 ### 1. Clone the repository
 
 ```
-git clone <repository_url>
+git clone https://github.com/JagTheFriend/Smart-Task-Planner-App.git
 cd smart-task-planner
 ```
 
