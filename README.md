@@ -9,7 +9,6 @@ Smart Task Planner is a RESTful backend service built with Go, Echo v5, GORM, an
 * GORM (ORM)
 * PostgreSQL
 * JWT (Authentication)
-* Railway (Deployment-ready configuration)
 
 ---
 
