@@ -43,7 +43,7 @@ func (h *AuthHandler) signup(c *echo.Context) error {
 		return c.JSON(http.StatusConflict, map[string]string{"message": "User Already Exists"})
 	}
 
-	if res.Error != nil {
+	if res.Error != nil && !errors.Is(res.Error, gorm.ErrRecordNotFound) {
 		slog.Error(fmt.Sprintf("Auth | Login Error | %s", res.Error.Error()))
 		return c.JSON(http.StatusInternalServerError, map[string]string{"message": "Something went wrong"})
 	}
