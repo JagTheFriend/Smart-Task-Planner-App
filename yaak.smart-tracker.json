@@ -1,0 +1,286 @@
+{
+  "yaakVersion": "2026.1.0",
+  "yaakSchema": 4,
+  "timestamp": "2026-02-11T14:27:35.326187565",
+  "resources": {
+    "workspaces": [
+      {
+        "model": "workspace",
+        "id": "wk_et8USEuou8",
+        "createdAt": "2026-02-10T14:35:46.996680993",
+        "updatedAt": "2026-02-10T14:35:46.996681884",
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Smart Tracker",
+        "encryptionKeyChallenge": null,
+        "settingValidateCertificates": true,
+        "settingFollowRedirects": true,
+        "settingRequestTimeout": 0,
+        "settingDnsOverrides": []
+      }
+    ],
+    "environments": [
+      {
+        "model": "environment",
+        "id": "ev_6EoaXmLYaU",
+        "workspaceId": "wk_et8USEuou8",
+        "createdAt": "2026-02-10T14:35:47.061084073",
+        "updatedAt": "2026-02-10T14:36:22.595890233",
+        "name": "Global Variables",
+        "public": false,
+        "base": true,
+        "parentModel": "workspace",
+        "parentId": null,
+        "variables": [
+          {
+            "enabled": true,
+            "name": "BASE_URL",
+            "value": "http://localhost:3000/api/v1",
+            "id": "7wCWvgWqNs"
+          }
+        ],
+        "color": null,
+        "sortPriority": 0.0
+      }
+    ],
+    "folders": [
+      {
+        "model": "folder",
+        "id": "fl_oCrVNYQy4x",
+        "createdAt": "2026-02-10T16:07:03.761970886",
+        "updatedAt": "2026-02-10T16:34:17.957330958",
+        "workspaceId": "wk_et8USEuou8",
+        "folderId": null,
+        "authentication": {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjF9.LQDd0sPQRvamXh1UFlH2JllX6M0qCfNydBx5O82cW5I"
+        },
+        "authenticationType": "bearer",
+        "description": "",
+        "headers": [],
+        "name": "Task",
+        "sortPriority": 1000.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_HWNz6YLny7",
+        "createdAt": "2026-02-10T14:53:38.098896718",
+        "updatedAt": "2026-02-10T16:24:37.749670776",
+        "workspaceId": "wk_et8USEuou8",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "Authentication",
+        "sortPriority": 0.0
+      }
+    ],
+    "httpRequests": [
+      {
+        "model": "http_request",
+        "id": "rq_y3tExBEDtJ",
+        "createdAt": "2026-02-11T13:42:41.743343637",
+        "updatedAt": "2026-02-11T13:42:45.922965050",
+        "workspaceId": "wk_et8USEuou8",
+        "folderId": "fl_HWNz6YLny7",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "GET",
+        "name": "Delete Account",
+        "sortPriority": -1770734194304.0,
+        "url": "",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_yczpYup3Mj",
+        "createdAt": "2026-02-10T16:32:31.325775410",
+        "updatedAt": "2026-02-11T13:30:24.018204991",
+        "workspaceId": "wk_et8USEuou8",
+        "folderId": "fl_oCrVNYQy4x",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "DELETE",
+        "name": "Delete Task",
+        "sortPriority": -1770734194303.996,
+        "url": "${[ BASE_URL ]}/task",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "id",
+            "value": "1",
+            "id": "64BMKPm46H"
+          },
+          {
+            "enabled": true,
+            "name": "",
+            "value": "",
+            "id": "CRvu3pbPBV"
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_LMHQivZrrT",
+        "createdAt": "2026-02-10T16:32:31.132998953",
+        "updatedAt": "2026-02-11T13:30:15.239821593",
+        "workspaceId": "wk_et8USEuou8",
+        "folderId": "fl_oCrVNYQy4x",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"id\": 1,\n  \"title\": \"Updated Task Title\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "DrSqZ76Sd7"
+          }
+        ],
+        "method": "PUT",
+        "name": "Update Task",
+        "sortPriority": -1770734194303.997,
+        "url": "${[ BASE_URL ]}/task",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_FSLb9opcVb",
+        "createdAt": "2026-02-10T16:32:30.757453489",
+        "updatedAt": "2026-02-10T16:36:16.651410024",
+        "workspaceId": "wk_et8USEuou8",
+        "folderId": "fl_oCrVNYQy4x",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "GET",
+        "name": "Get Tasks",
+        "sortPriority": -1770734194303.998,
+        "url": "${[ BASE_URL ]}/task",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_5KQwGc4wXJ",
+        "createdAt": "2026-02-10T16:32:18.865963209",
+        "updatedAt": "2026-02-11T13:32:43.520417982",
+        "workspaceId": "wk_et8USEuou8",
+        "folderId": "fl_oCrVNYQy4x",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"title\": \"Finish Backend API\",\n  \"description\": \"Complete task CRUD implementation\",\n  \"deadline\": \"2026-02-20T18:00:00Z\"\n}\n"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "G4Ji4YEqqv"
+          }
+        ],
+        "method": "POST",
+        "name": "Create Task",
+        "sortPriority": -1770734194303.999,
+        "url": "${[ BASE_URL ]}/task",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_5uffk6uVVi",
+        "createdAt": "2026-02-10T14:53:44.516743202",
+        "updatedAt": "2026-02-10T16:24:40.311304421",
+        "workspaceId": "wk_et8USEuou8",
+        "folderId": "fl_HWNz6YLny7",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"email\": \"fake-email@fake.com\",\n  \"password\": \"hello-world\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "bda54j2d8F"
+          }
+        ],
+        "method": "POST",
+        "name": "Login",
+        "sortPriority": -1770734194303.999,
+        "url": "${[ BASE_URL ]}/auth/login",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_rus4UqrsCs",
+        "createdAt": "2026-02-10T14:53:41.009512500",
+        "updatedAt": "2026-02-11T13:42:49.667233665",
+        "workspaceId": "wk_et8USEuou8",
+        "folderId": "fl_HWNz6YLny7",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"name\": \"NiceName\",\n  \"email\": \"fake2-email@fake.com\",\n  \"password\": \"hello-world\"\n}"
+        },
+        "bodyType": "application/json",
+        "description": "",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "WTxyzeYTTP"
+          }
+        ],
+        "method": "POST",
+        "name": "Sign-up",
+        "sortPriority": -1770734194304.0,
+        "url": "${[ BASE_URL ]}/auth/signup",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_39KfszCkUb",
+        "createdAt": "2026-02-10T14:36:34.304657653",
+        "updatedAt": "2026-02-10T16:24:37.761574028",
+        "workspaceId": "wk_et8USEuou8",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "",
+        "headers": [],
+        "method": "GET",
+        "name": "Health Check",
+        "sortPriority": 2000.0,
+        "url": "${[ BASE_URL ]}/health",
+        "urlParameters": []
+      }
+    ],
+    "grpcRequests": [],
+    "websocketRequests": []
+  }
+}
